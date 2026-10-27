@@ -1,17 +1,51 @@
-# photo_of_the_day_hortunova
+# Фото дня
 
-A new Flutter project.
+Приложение на Flutter, которое загружает случайные фотографии собак и пейзажей. Проект демонстрирует работу с асинхронностью в Dart (Future, async/await) и локальными ассетами.
 
-## Getting Started
+## Информация об авторе
 
-This project is a starting point for a Flutter application.
+- **ФИО0:** Хортюнова София 
+- **Группа:** ИСП-241
 
-A few resources to get you started if this is your first Flutter project:
+## Стек и версии
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- **Flutter:** 3
+- **Dart:** 3
+- **Платформа:** Web (Chrome)
+- **Пакет:** `http` (для сетевых запросов)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Скриншот приложения
+
+![Скриншот приложения](img/step2_hortunova.png)
+
+## Как запустить
+
+1. `git clone <url>`
+2. `cd photo_of_the_day`
+3. `flutter pub get`
+4. `flutter run -d chrome`
+
+## Что изучили
+
+- Что такое `Future<T>` и как он работает в Dart.
+- Использование ключевых слов `async` и `await` для асинхронного кода.
+- Обработка ошибок через `try/catch`.
+- Отправка HTTP-запросов и парсинг JSON с помощью `jsonDecode`.
+- Отображение индикатора загрузки (`CircularProgressIndicator`) и локальных картинок (`Image.asset`).
+
+## Ответы на вопросы
+
+**1. Что такое Future<T>? Чем отличается от обычного возвращаемого значения?**
+`Future<T>` — это объект, который обещает вернуть значение типа `T` в будущем. Обычное значение доступно сразу, а Future — только когда завершится какая-то операция (например, загрузка из сети). 
+
+**2. Что делает await? Блокирует ли он весь поток выполнения?**
+`await` приостанавливает выполнение текущей функции до тех пор, пока Future не завершится. Он **не блокирует** весь поток: интерфейс приложения продолжает работать, и пользователь может нажимать на кнопки.
+
+**3. Зачем setState() вызывается дважды в _fetchPhoto()?**
+Первый раз — в начале метода, чтобы показать индикатор загрузки (крутилку) и сбросить старую картинку. Второй раз — в конце, чтобы скрыть индикатор и показать результат (новую картинку или ошибку).
+
+**4. Почему кнопке передаётся _fetchPhoto без скобок, а не _fetchPhoto()?**
+Без скобок передается ссылка на саму функцию, и она вызовется только тогда, когда пользователь нажмет на кнопку. Если написать со скобками `_fetchPhoto()`, функция вызовется сразу при запуске приложения.
+
+**5. Чем Image.network() отличается от Image.asset()?**
+`Image.network()` загружает картинку из интернета по ссылке (URL). `Image.asset()` берет картинку из локальной папки проекта (в нашем случае из `assets/images/`).
