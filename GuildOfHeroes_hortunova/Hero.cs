@@ -1,4 +1,5 @@
-public class Hero {
+public class Hero
+{
     public string Name;
     public int Health;
     public int Level;
@@ -34,11 +35,25 @@ public class Hero {
 
         Health += amount;
     }
-public void GainExperience(int amount) {
-    if (amount <= 0) {
-        return;
+    public void GainExperience(int amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        Experience += amount;
     }
 
-    Experience += amount;
+    public bool IsAlive()
+    {
+        return Health > 0;
+    }
+
+public string GetInfo() {
+    return $">>> {Name} <<<\n" +
+           $"Здоровье: {Health}\n" +
+           $"Уровень: {Level}\n" +
+           $"Опыт: {Experience}";
 }
 }
