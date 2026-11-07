@@ -47,7 +47,7 @@ Console.WriteLine(artem.GetInfo());
 
 //yaroslav.Health = 75;
 
-Console.WriteLine(">>> Герой 1 <<<");
+/*Console.WriteLine(">>> Герой 1 <<<");
 Console.WriteLine($"Имя: {yaroslav.Name}");
 Console.WriteLine($"Здоровье: {yaroslav.Health}");
 Console.WriteLine($"Уровень: {yaroslav.Level}");
@@ -100,4 +100,4 @@ Console.WriteLine($"Часов в {witcher.Title} до: {witcher.PlayTime}");
 witcher.AddPlayTime(15);
 Console.WriteLine($"Часов в {witcher.Title} после нормы: {witcher.PlayTime}");
 witcher.AddPlayTime(-5);
-Console.WriteLine($"Часов в {witcher.Title} после ошибки: {witcher.PlayTime}");
+Console.WriteLine($"Часов в {witcher.Title} после ошибки: {witcher.PlayTime}");*/
