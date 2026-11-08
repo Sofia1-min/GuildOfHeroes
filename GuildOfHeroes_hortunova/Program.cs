@@ -7,8 +7,22 @@ Hero anastasia = new Hero("Анастасия", 90);
 Hero artem = new Hero("Артём", 120);
 Hero alexander = new Hero("   Александр   ", 150);
 
+alexander.TakeDamage(10);
+alexander.Heal(10);
+
+Console.WriteLine(">>> Участники готовы <<<");
+Console.WriteLine();
+Console.WriteLine(yaroslav.GetInfo());
+Console.WriteLine();
+Console.WriteLine(anastasia.GetInfo());
+Console.WriteLine();
+Console.WriteLine(artem.GetInfo());
+Console.WriteLine();
+Console.WriteLine(alexander.GetInfo());
+Console.WriteLine($"Предел здоровья Александра: {alexander.MaxHealth}");
+
 // лаба 2
-Console.WriteLine($"До вызовов: {yaroslav.Health}, {anastasia.Health}, {artem.Health}");
+/*Console.WriteLine($"До вызовов: {yaroslav.Health}, {anastasia.Health}, {artem.Health}");
 
 yaroslav.TakeDamage(25);
 anastasia.TakeDamage(30);
@@ -49,7 +63,7 @@ Console.WriteLine();
 Console.WriteLine(anastasia.GetInfo());
 Console.WriteLine();
 Console.WriteLine(artem.GetInfo());
-
+*/
 // лаба 1
 //yaroslav.Health = 75;
 
@@ -76,7 +90,7 @@ Console.WriteLine($"Уровень: {artem.Level}");
 Console.WriteLine($"Опыт: {artem.Experience}");*/
 
 // самостоятельное задание
-/*Game witcher = new Game("Ведьмак 3", "RPG", 2015);
+Game witcher = new Game("Ведьмак 3", "RPG", 2015);
 Game minecraft = new Game("Minecraft", "Sandbox", 2011);
 Game portal = new Game("Portal 2", "Puzzle", 2011);
 
@@ -108,4 +122,22 @@ Console.WriteLine($"Часов в {witcher.Title} до: {witcher.PlayTime}");
 witcher.AddPlayTime(15);
 Console.WriteLine($"Часов в {witcher.Title} после нормы: {witcher.PlayTime}");
 witcher.AddPlayTime(-5);
-Console.WriteLine($"Часов в {witcher.Title} после ошибки: {witcher.PlayTime}");*/
+Console.WriteLine($"Часов в {witcher.Title} после ошибки: {witcher.PlayTime}");
+
+Console.WriteLine("\n--- Проверка класса Game ---");
+
+
+Game myGame = new Game("   Ведьмак 3   ", "RPG", 2015);
+Console.WriteLine($"Игра: [{myGame.Title}], Часы: {myGame.PlayTime}");
+
+
+myGame.AddPlayTime(10);
+Console.WriteLine($"После игры 10 часов: {myGame.PlayTime}");
+
+
+myGame.AddPlayTime(-5);
+Console.WriteLine($"После попытки накрутить -5 часов: {myGame.PlayTime}");
+
+
+Game badGame = new Game("   ", "Action", 2023);
+Console.WriteLine($"Игра с пустым именем: [{badGame.Title}]");
