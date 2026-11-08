@@ -1,7 +1,13 @@
-﻿Hero yaroslav = new Hero("Ярослав", 100);
+﻿/*Hero yaroslav = new Hero("Ярослав", 100);
 Hero anastasia = new Hero("Анастасия", 90);
-Hero artem = new Hero("Артем", 120);
+Hero artem = new Hero("Артем", 120);*/
+// лаба 3
+Hero yaroslav = new Hero("Ярослав", 100);
+Hero anastasia = new Hero("Анастасия", 90);
+Hero artem = new Hero("Артём", 120);
+Hero alexander = new Hero("   Александр   ", 150);
 
+// лаба 2
 Console.WriteLine($"До вызовов: {yaroslav.Health}, {anastasia.Health}, {artem.Health}");
 
 yaroslav.TakeDamage(25);
@@ -44,7 +50,7 @@ Console.WriteLine(anastasia.GetInfo());
 Console.WriteLine();
 Console.WriteLine(artem.GetInfo());
 
-
+// лаба 1
 //yaroslav.Health = 75;
 
 /*Console.WriteLine(">>> Герой 1 <<<");
@@ -67,8 +73,10 @@ Console.WriteLine(">>> Герой 3 <<<");
 Console.WriteLine($"Имя: {artem.Name}");
 Console.WriteLine($"Здоровье: {artem.Health}");
 Console.WriteLine($"Уровень: {artem.Level}");
-Console.WriteLine($"Опыт: {artem.Experience}");
-Game witcher = new Game("Ведьмак 3", "RPG", 2015);
+Console.WriteLine($"Опыт: {artem.Experience}");*/
+
+// самостоятельное задание
+/*Game witcher = new Game("Ведьмак 3", "RPG", 2015);
 Game minecraft = new Game("Minecraft", "Sandbox", 2011);
 Game portal = new Game("Portal 2", "Puzzle", 2011);
 
