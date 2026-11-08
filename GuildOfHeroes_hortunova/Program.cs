@@ -141,3 +141,13 @@ Console.WriteLine($"После попытки накрутить -5 часов: 
 
 Game badGame = new Game("   ", "Action", 2023);
 Console.WriteLine($"Игра с пустым именем: [{badGame.Title}]");
+
+Console.WriteLine("\n--- Доп. часть Г: Две игры ---");
+Game game1 = new Game("   GTA V   ", "Action", 2013);
+Game game2 = new Game("Minecraft", "Sandbox", 2011);
+
+game1.ChangeRating(15); 
+game2.ChangeRating(-5); 
+
+Console.WriteLine($"Игра 1: {game1.Title}, Рейтинг: {game1.Rating}");
+Console.WriteLine($"Игра 2: {game2.Title}, Рейтинг: {game2.Rating}");
