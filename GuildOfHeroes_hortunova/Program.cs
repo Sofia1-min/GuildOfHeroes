@@ -1,8 +1,67 @@
-﻿/*Hero yaroslav = new Hero("Ярослав", 100);
-Hero anastasia = new Hero("Анастасия", 90);
-Hero artem = new Hero("Артем", 120);*/
-// лаба 3
+﻿//Probe.Run();
+Hero alexander = new Hero("   Александр   ", 150);
 Hero yaroslav = new Hero("Ярослав", 100);
+Hero anastasia = new Hero("Анастасия", 90);
+Hero artem = new Hero("Артем", 120);
+Hero sergey = new Hero("Сергей", 110);
+alexander.TakeDamage(10);
+alexander.Heal(10);
+
+Console.WriteLine(yaroslav.GetInfo());
+Console.WriteLine();
+Console.WriteLine(anastasia.GetInfo());
+Console.WriteLine();
+Console.WriteLine(artem.GetInfo());
+Console.WriteLine();
+Console.WriteLine(alexander.GetInfo());
+
+Guild guild = new Guild("Гильдия героев");
+
+guild.Heroes.Add(yaroslav);
+guild.Heroes.Add(anastasia);
+guild.Heroes.Add(artem);
+guild.Heroes.Add(alexander);
+guild.Heroes.Add(sergey);
+
+Console.WriteLine($">>> {guild.Name}: перекличка <<<");
+Console.WriteLine($"Участников: {guild.Heroes.Count}");
+
+if (guild.Heroes.Count > 0)
+{
+    Console.WriteLine($"Первый: {guild.Heroes[0].Name}");
+    Console.WriteLine($"Последний: {guild.Heroes[guild.Heroes.Count - 1].Name}");
+}
+
+Console.WriteLine();
+foreach (Hero hero in guild.Heroes)
+{
+    Console.WriteLine(hero.GetInfo());
+    Console.WriteLine();
+}
+ // 12,1
+ int strongCount = 0;
+foreach (Hero hero in guild.Heroes) {
+    if (hero.Health >= 120) {
+        strongCount += 1;
+    }
+}
+Console.WriteLine($"Могут нести тяжёлые ящики (здоровье от 120): {strongCount}");
+//12,2
+if (guild.Heroes.Count > 0) {
+    Hero strongest = guild.Heroes[0];
+    foreach (Hero hero in guild.Heroes) {
+        if (hero.Health > strongest.Health) {
+            strongest = hero;
+        }
+    }
+    Console.WriteLine($"Самый здоровый: {strongest.Name} ({strongest.Health})");
+}
+
+
+//лаба 4
+
+// лаба 3
+/*Hero yaroslav = new Hero("Ярослав", 100);
 Hero anastasia = new Hero("Анастасия", 90);
 Hero artem = new Hero("Артём", 120);
 Hero alexander = new Hero("   Александр   ", 150);
@@ -19,7 +78,8 @@ Console.WriteLine();
 Console.WriteLine(artem.GetInfo());
 Console.WriteLine();
 Console.WriteLine(alexander.GetInfo());
-Console.WriteLine($"Предел здоровья Александра: {alexander.MaxHealth}");
+
+Console.WriteLine($"Предел здоровья Александра: {alexander.MaxHealth}");*/
 
 // лаба 2
 /*Console.WriteLine($"До вызовов: {yaroslav.Health}, {anastasia.Health}, {artem.Health}");
@@ -90,7 +150,7 @@ Console.WriteLine($"Уровень: {artem.Level}");
 Console.WriteLine($"Опыт: {artem.Experience}");*/
 
 // самостоятельное задание
-Game witcher = new Game("Ведьмак 3", "RPG", 2015);
+/*Game witcher = new Game("Ведьмак 3", "RPG", 2015);
 Game minecraft = new Game("Minecraft", "Sandbox", 2011);
 Game portal = new Game("Portal 2", "Puzzle", 2011);
 
@@ -151,3 +211,37 @@ game2.ChangeRating(-5);
 
 Console.WriteLine($"Игра 1: {game1.Title}, Рейтинг: {game1.Rating}");
 Console.WriteLine($"Игра 2: {game2.Title}, Рейтинг: {game2.Rating}");
+
+List<Game> games = new List<Game>();
+Game game1 = new Game("Ведьмак 3", "RPG", 2015);
+Game game2 = new Game("Майнкрафт", "Песочница", 2011);
+Game game3 = new Game("GTA V", "Экшн", 2013);
+
+games.Add(game1);
+games.Add(game2);
+games.Add(game3);
+Console.WriteLine($"Всего игр: {games.Count}");
+if (games.Count > 0) {
+    Console.WriteLine($"Первая игра: {games[0].Title}");
+    Console.WriteLine($"Последняя игра: {games[games.Count - 1].Title}");
+}
+
+foreach (Game game in games) {
+    Console.WriteLine($"Игра: {game.Title}, Жанр: {game.Genre}, Часы: {game.PlayTime}");
+}
+
+games.Add(new Game("Тетрис", "Головоломка", 1984));
+Console.WriteLine($"Добавили 4-ю игру. Теперь их: {games.Count}");
+
+int modernGames = 0;
+foreach (Game game in games) {
+    if (game.ReleaseYear > 2012) {
+        modernGames++;
+    }
+}
+Console.WriteLine($"Игр, выпущенных после 2012 года: {modernGames}");
+
+game1.AddPlayTime(50); // Добавили 50 часов Ведьмаку
+Console.WriteLine($"Ведьмак после добавления времени: {game1.PlayTime} ч.");
+Console.WriteLine($"Проверка через список: {games[0].PlayTime} ч.");
+*/
