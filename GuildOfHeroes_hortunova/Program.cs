@@ -17,43 +17,51 @@ Console.WriteLine(alexander.GetInfo());
 
 Guild guild = new Guild("Гильдия героев");
 
-guild.Heroes.Add(yaroslav);
-guild.Heroes.Add(anastasia);
-guild.Heroes.Add(artem);
-guild.Heroes.Add(alexander);
-guild.Heroes.Add(sergey);
+guild.AddHero(yaroslav);
+guild.AddHero(anastasia);
+guild.AddHero(artem);
+guild.AddHero(yaroslav);
+guild.AddHero(sergey);
+
+List<Hero> members = guild.GetMembers();
 
 Console.WriteLine($">>> {guild.Name}: перекличка <<<");
-Console.WriteLine($"Участников: {guild.Heroes.Count}");
+Console.WriteLine($"Участников: {guild.MemberCount}");
 
-if (guild.Heroes.Count > 0)
-{
-    Console.WriteLine($"Первый: {guild.Heroes[0].Name}");
-    Console.WriteLine($"Последний: {guild.Heroes[guild.Heroes.Count - 1].Name}");
+if (members.Count > 0) {
+    Console.WriteLine($"Первый: {members[0].Name}");
+    Console.WriteLine($"Последний: {members[members.Count - 1].Name}");
 }
 
 Console.WriteLine();
-foreach (Hero hero in guild.Heroes)
+foreach (Hero hero in members)
 {
     Console.WriteLine(hero.GetInfo());
     Console.WriteLine();
-}
- // 12,1
- int strongCount = 0;
-foreach (Hero hero in guild.Heroes) {
-    if (hero.Health >= 120) {
-        strongCount += 1;
+
+    Hero? found = guild.FindHeroByName(" аРтЁм ");
+    if (found != null)
+    {
+        Console.WriteLine($"Найден по запросу « аРтЁм »: {found.Name}");
     }
+    else
+    {
+        Console.WriteLine("По запросу « аРтЁм » никого нет.");
+    }
+
 }
-Console.WriteLine($"Могут нести тяжёлые ящики (здоровье от 120): {strongCount}");
+
+Console.WriteLine($"Повтор Александра принят: {guild.AddHero(alexander)}");
+
+Console.WriteLine($"Удалён отсутствующий: {guild.RemoveHero("Борис")}");
+Console.WriteLine($"Участников после проверок: {guild.MemberCount}");
+
+// 12,1
+Console.WriteLine($"Могут нести тяжёлые ящики (здоровье от 120): {guild.CountHealthy(120)}");
 //12,2
-if (guild.Heroes.Count > 0) {
-    Hero strongest = guild.Heroes[0];
-    foreach (Hero hero in guild.Heroes) {
-        if (hero.Health > strongest.Health) {
-            strongest = hero;
-        }
-    }
+Hero? strongest = guild.FindStrongest();
+if (strongest != null)
+{
     Console.WriteLine($"Самый здоровый: {strongest.Name} ({strongest.Health})");
 }
 
@@ -150,11 +158,14 @@ Console.WriteLine($"Уровень: {artem.Level}");
 Console.WriteLine($"Опыт: {artem.Experience}");*/
 
 // самостоятельное задание
-/*Game witcher = new Game("Ведьмак 3", "RPG", 2015);
+// --- Самостоятельное задание ---
+
+
+Game witcher = new Game("Геншин Импакт", "RPG", 2020);
 Game minecraft = new Game("Minecraft", "Sandbox", 2011);
 Game portal = new Game("Portal 2", "Puzzle", 2011);
 
-witcher.Rating = 9.8; // рейтинг можно поменять потом
+witcher.ChangeRating(9.8);
 
 Console.WriteLine(">>> Игра 1 <<<");
 Console.WriteLine($"Название: {witcher.Title}");
@@ -163,7 +174,6 @@ Console.WriteLine($"Год выхода: {witcher.ReleaseYear}");
 Console.WriteLine($"Рейтинг: {witcher.Rating}");
 
 Console.WriteLine();
-
 Console.WriteLine(">>> Игра 2 <<<");
 Console.WriteLine($"Название: {minecraft.Title}");
 Console.WriteLine($"Жанр: {minecraft.Genre}");
@@ -171,14 +181,13 @@ Console.WriteLine($"Год выхода: {minecraft.ReleaseYear}");
 Console.WriteLine($"Рейтинг: {minecraft.Rating}");
 
 Console.WriteLine();
-
 Console.WriteLine(">>> Игра 3 <<<");
 Console.WriteLine($"Название: {portal.Title}");
 Console.WriteLine($"Жанр: {portal.Genre}");
 Console.WriteLine($"Год выхода: {portal.ReleaseYear}");
 Console.WriteLine($"Рейтинг: {portal.Rating}");
 
-Console.WriteLine($"Часов в {witcher.Title} до: {witcher.PlayTime}");
+Console.WriteLine($"\nЧасов в {witcher.Title} до: {witcher.PlayTime}");
 witcher.AddPlayTime(15);
 Console.WriteLine($"Часов в {witcher.Title} после нормы: {witcher.PlayTime}");
 witcher.AddPlayTime(-5);
@@ -186,40 +195,38 @@ Console.WriteLine($"Часов в {witcher.Title} после ошибки: {witc
 
 Console.WriteLine("\n--- Проверка класса Game ---");
 
-
-Game myGame = new Game("   Ведьмак 3   ", "RPG", 2015);
+Game myGame = new Game("   Геншин Импакт   ", "RPG", 2020);
 Console.WriteLine($"Игра: [{myGame.Title}], Часы: {myGame.PlayTime}");
-
 
 myGame.AddPlayTime(10);
 Console.WriteLine($"После игры 10 часов: {myGame.PlayTime}");
 
-
 myGame.AddPlayTime(-5);
 Console.WriteLine($"После попытки накрутить -5 часов: {myGame.PlayTime}");
-
 
 Game badGame = new Game("   ", "Action", 2023);
 Console.WriteLine($"Игра с пустым именем: [{badGame.Title}]");
 
 Console.WriteLine("\n--- Доп. часть Г: Две игры ---");
-Game game1 = new Game("   GTA V   ", "Action", 2013);
+Game game1 = new Game("   Геншин Импакт   ", "Action", 2020);
 Game game2 = new Game("Minecraft", "Sandbox", 2011);
 
-game1.ChangeRating(15); 
-game2.ChangeRating(-5); 
+game1.ChangeRating(15);
+game2.ChangeRating(-5);
 
 Console.WriteLine($"Игра 1: {game1.Title}, Рейтинг: {game1.Rating}");
 Console.WriteLine($"Игра 2: {game2.Title}, Рейтинг: {game2.Rating}");
 
+Console.WriteLine("\n=== Список игр ===");
 List<Game> games = new List<Game>();
-Game game1 = new Game("Ведьмак 3", "RPG", 2015);
-Game game2 = new Game("Майнкрафт", "Песочница", 2011);
-Game game3 = new Game("GTA V", "Экшн", 2013);
+Game listGame1 = new Game("Геншин Импакт", "RPG", 2020);
+Game listGame2 = new Game("Майнкрафт", "Песочница", 2011);
+Game listGame3 = new Game("GTA V", "Экшн", 2013);
 
-games.Add(game1);
-games.Add(game2);
-games.Add(game3);
+games.Add(listGame1);
+games.Add(listGame2);
+games.Add(listGame3);
+
 Console.WriteLine($"Всего игр: {games.Count}");
 if (games.Count > 0) {
     Console.WriteLine($"Первая игра: {games[0].Title}");
@@ -241,7 +248,28 @@ foreach (Game game in games) {
 }
 Console.WriteLine($"Игр, выпущенных после 2012 года: {modernGames}");
 
-game1.AddPlayTime(50); // Добавили 50 часов Ведьмаку
-Console.WriteLine($"Ведьмак после добавления времени: {game1.PlayTime} ч.");
+listGame1.AddPlayTime(50);
+Console.WriteLine($"Геншин после добавления времени: {listGame1.PlayTime} ч.");
 Console.WriteLine($"Проверка через список: {games[0].PlayTime} ч.");
-*/
+
+Console.WriteLine("\n=== Каталог игр ===");
+GameCatalog cat = new GameCatalog();
+
+Console.WriteLine($"Добавлена Геншин: {cat.AddGame(new Game("Геншин Импакт", "RPG", 2020))}");
+Console.WriteLine($"Повтор ' гЕншин Импакт ': {cat.AddGame(new Game("  гЕншин Импакт ", "RPG", 2020))}");
+
+cat.AddGame(new Game("Minecraft", "Sandbox", 2011));
+cat.AddGame(new Game("Portal 2", "Puzzle", 2011));
+
+Game? foundGame = cat.FindByTitle("minecraft");
+if (foundGame != null) Console.WriteLine($"Найдено: {foundGame.Title}");
+
+Game? notFound = cat.FindByTitle("Тетрис");
+if (notFound != null) Console.WriteLine($"Найдено: {notFound.Title}");
+else Console.WriteLine("Тетрис не найден (null).");
+
+Console.WriteLine($"Игр до удаления: {cat.Count}");
+cat.RemoveGame("Portal 2");
+Console.WriteLine($"Игр после удаления: {cat.Count}");
+
+Console.WriteLine($"Игр с рейтингом 8+: {cat.CountHighRated(8)}");

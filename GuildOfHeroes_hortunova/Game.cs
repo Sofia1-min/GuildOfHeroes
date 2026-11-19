@@ -1,5 +1,4 @@
 public class Game {
-  
     private string _title = "Без названия";
     public string Title {
         get { return _title; }
@@ -15,7 +14,6 @@ public class Game {
     public string Genre;
     public int ReleaseYear;
 
-
     private double _rating;
     public double Rating {
         get { return _rating; }
@@ -26,7 +24,6 @@ public class Game {
         }
     }
 
-  
     public int PlayTime { get; private set; }
 
     public Game(string title, string genre, int releaseYear) {
@@ -34,19 +31,58 @@ public class Game {
         Genre = genre;
         ReleaseYear = releaseYear;
         Rating = 0;
-        PlayTime = 0; 
+        PlayTime = 0;
     }
-
 
     public void AddPlayTime(int hours) {
         if (hours <= 0) {
-            return; 
+            return;
         }
         PlayTime += hours;
     }
 
-
     public void ChangeRating(double newRating) {
-        Rating = newRating; 
+        Rating = newRating;
+    }
+}
+
+public class GameCatalog {
+    private List<Game> _games = new List<Game>();
+
+    public int Count => _games.Count;
+
+    public bool AddGame(Game game) {
+        if (FindByTitle(game.Title) != null) return false;
+        _games.Add(game);
+        return true;
+    }
+
+    public Game? FindByTitle(string title) {
+        if (string.IsNullOrWhiteSpace(title)) return null;
+        string search = title.Trim();
+        foreach (Game g in _games) {
+            if (string.Equals(g.Title, search, StringComparison.OrdinalIgnoreCase)) return g;
+        }
+        return null;
+    }
+
+    public bool RemoveGame(string title) {
+        Game? g = FindByTitle(title);
+        if (g == null) return false;
+        return _games.Remove(g);
+    }
+
+    public List<Game> GetGames() {
+        List<Game> copy = new List<Game>();
+        foreach (Game g in _games) copy.Add(g);
+        return copy;
+    }
+
+    public int CountHighRated(double minRating) {
+        int count = 0;
+        foreach (Game g in _games) {
+            if (g.Rating >= minRating) count++;
+        }
+        return count;
     }
 }
