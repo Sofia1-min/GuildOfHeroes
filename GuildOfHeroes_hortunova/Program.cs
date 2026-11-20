@@ -22,7 +22,35 @@ guild.AddHero(anastasia);
 guild.AddHero(artem);
 guild.AddHero(yaroslav);
 guild.AddHero(sergey);
+//лаба 6
+Console.WriteLine($">>> {guild.Name}: участников {guild.MemberCount} <<<");
+Console.WriteLine();
 
+QuestBoard board = new QuestBoard(guild);
+
+Quest floatQuest = new Quest(101, "Вернуть поплавок", 100, 30);
+Console.WriteLine($"Поручение добавлено: {board.AddQuest(floatQuest)}");
+Console.WriteLine($">>> №{floatQuest.Id}: {floatQuest.Title} <<<");
+
+Console.WriteLine($"Назначение Сергея: {board.TryAssign(101, " сЕрГеЙ ")}");
+Hero? assigned = floatQuest.AssignedHero;
+if (assigned != null) {
+    Console.WriteLine($"Исполнитель: {assigned.Name}");
+}
+Console.WriteLine($"Опыт после назначения: {sergey.Experience}");
+
+Console.WriteLine($"Завершение: {board.TryComplete(101)}");
+Console.WriteLine($"Опыт после завершения: {sergey.Experience}");
+Console.WriteLine($"Повторное завершение: {board.TryComplete(101)}");
+Console.WriteLine($"Опыт после повтора: {sergey.Experience}");
+
+Console.WriteLine();
+Console.WriteLine(floatQuest.GetInfo());
+Console.WriteLine(sergey.GetInfo());
+
+
+/*
+//лаба 5
 List<Hero> members = guild.GetMembers();
 
 Console.WriteLine($">>> {guild.Name}: перекличка <<<");
@@ -55,7 +83,7 @@ Console.WriteLine($"Повтор Александра принят: {guild.AddHe
 
 Console.WriteLine($"Удалён отсутствующий: {guild.RemoveHero("Борис")}");
 Console.WriteLine($"Участников после проверок: {guild.MemberCount}");
-
+//лаба 4
 // 12,1
 Console.WriteLine($"Могут нести тяжёлые ящики (здоровье от 120): {guild.CountHealthy(120)}");
 //12,2
@@ -63,7 +91,7 @@ Hero? strongest = guild.FindStrongest();
 if (strongest != null)
 {
     Console.WriteLine($"Самый здоровый: {strongest.Name} ({strongest.Health})");
-}
+}*/
 
 
 //лаба 4
@@ -159,8 +187,9 @@ Console.WriteLine($"Опыт: {artem.Experience}");*/
 
 // самостоятельное задание
 // --- Самостоятельное задание ---
-
-
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine($"Мой личный проект");
 Game witcher = new Game("Геншин Импакт", "RPG", 2020);
 Game minecraft = new Game("Minecraft", "Sandbox", 2011);
 Game portal = new Game("Portal 2", "Puzzle", 2011);
@@ -273,3 +302,17 @@ cat.RemoveGame("Portal 2");
 Console.WriteLine($"Игр после удаления: {cat.Count}");
 
 Console.WriteLine($"Игр с рейтингом 8+: {cat.CountHighRated(8)}");
+
+Console.WriteLine("\n=== Игровая сессия ===");
+
+Game sessionGame = new Game("Геншин Импакт", "RPG", 2020);
+GameSession session = new GameSession(1);
+
+Console.WriteLine($"Начало сессии: {session.TryStart(sessionGame)}");
+Console.WriteLine($"Повторное начало: {session.TryStart(sessionGame)}");
+
+Console.WriteLine($"Завершение (сыграно 3 часа): {session.TryFinish(3)}");
+Console.WriteLine($"Часы у игры: {sessionGame.PlayTime}");
+
+Console.WriteLine($"Повторное завершение: {session.TryFinish(1)}");
+Console.WriteLine($"Часы у игры после повтора: {sessionGame.PlayTime}");
